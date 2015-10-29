@@ -1,4 +1,4 @@
-package REMS;
+package sourcecode;
 
 public enum Commands {
 	
