@@ -20,17 +20,16 @@ public class Server {
 		// Listen for clients. Block till one connects
 
 		System.out.println("Waiting for clients...");
-		Socket client = serverSocket.accept();
+		Socket socketclient = serverSocket.accept();
 
-		// A client has connected to this server. Send welcome message
-		sendWelcomeMessage(client);
+		sendWelcomeMessage(socketclient);
 	}
 
-	private void sendWelcomeMessage(Socket client) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-		writer.write("Hello. You are connected to a Simple Socket Server. What is your name?");
-		writer.flush();
-		writer.close();
+	private void sendWelcomeMessage(Socket socketclient) throws IOException {
+		BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(socketclient.getOutputStream()));
+		bfwriter.write("Hello. You are connected to a Simple Socket Server. What is your name?");
+		bfwriter.flush();
+		bfwriter.close();
 	}
 
 	/**
