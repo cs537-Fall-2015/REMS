@@ -3,8 +3,14 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_60"/>
 	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/gson-2.3.1.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/org.json-20120521.jar"/>
 	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/java-json.jar"/>
+=======
+	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/java-json.jar"/>
+	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="P:/CS_537/CS537_Workspace/REMSF15G1/REMS/libs/org.json-20120521.jar"/>
+>>>>>>> Sunil-Branch
 	<classpathentry kind="output" path="bin"/>
 </classpath>
