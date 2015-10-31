@@ -4,8 +4,8 @@ import generic.RoverThreadHandler;
 
 import java.io.IOException;
 
-import REMS.REMSClient;
-import REMS.REMSServer;
+import REMS.refrencecode.REMSClient;
+import REMS.refrencecode.REMSServer;
 
 public class RemsMain {
 

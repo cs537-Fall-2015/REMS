@@ -1,4 +1,4 @@
-package REMS;
+package REMS.refrencecode;
 
 public class REMS {
 	private double REMS_VERTICAL_WINDSPEED_MIN;
