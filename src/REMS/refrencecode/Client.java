@@ -1,3 +1,4 @@
+package REMS.refrencecode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,22 +24,22 @@ public class Client {
 
 	    public void readResponse() throws IOException{
 	        String userInput;
-	        BufferedReader bfReader = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
+	        BufferedReader stdIn = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 
 	        System.out.println("Response from server:");
-	        while ((userInput = bfReader.readLine()) != null) {
+	        while ((userInput = stdIn.readLine()) != null) {
 	            System.out.println(userInput);
 	        }
 	    }
 
 	    public static void main(String arg[]){
 	        //Creating a SocketClient object
-	        Client socketclient = new Client ("localhost",10254);
+	        Client client = new Client ("localhost",10254);
 	        try {
 	            //trying to establish connection to the server
-	            socketclient.connect();
+	            client.connect();
 	            //if successful, read response from server
-	            socketclient.readResponse();
+	            client.readResponse();
 
 	        } catch (UnknownHostException e) {
 	            System.err.println("Host unknown. Cannot establish connection");
@@ -46,4 +47,5 @@ public class Client {
 	            System.err.println("Cannot establish connection. Server may not be up."+e.getMessage());
 	        }
 	    }
+
 }
