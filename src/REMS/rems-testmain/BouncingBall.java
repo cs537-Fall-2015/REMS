@@ -1,4 +1,3 @@
-package pratik;
 
    import java.awt.*;
 import java.awt.Image;
