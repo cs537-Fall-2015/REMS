@@ -8,8 +8,8 @@ public class testREMSCommands {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter A Command");
-		String command = sc.nextLine();
+//		System.out.println("Enter A Command");
+//		String command = sc.nextLine();
 
 	
 		REMSCommands commands = new REMSCommands(Commands.REMS_GROUDTEMP_MIN);
