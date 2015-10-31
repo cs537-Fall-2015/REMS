@@ -1,14 +1,13 @@
+package REMS;
 
-   import java.awt.*;
+import java.awt.*;
 import java.awt.Image;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.util.*;
 import java.awt.geom.*;
 import java.applet.AudioClip;
-import java.net.*;
 
 public class BouncingBall extends JPanel implements Runnable, KeyListener {
 	// Set up variables

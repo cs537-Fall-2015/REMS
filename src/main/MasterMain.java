@@ -1,13 +1,7 @@
 package main;
 
 import generic.RoverThreadHandler;
-
 import java.io.IOException;
-
-import module1.ModuleOneClient;
-import module1.ModuleOneServer;
-import module2.ModuleTwoClient;
-import module2.ModuleTwoServer;
 
 public class MasterMain {
 

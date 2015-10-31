@@ -1,4 +1,4 @@
-package sourcecode;
+package REMS;
 
 import java.util.Scanner;
 

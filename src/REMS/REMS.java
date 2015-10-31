@@ -1,4 +1,4 @@
-package main;
+package REMS;
 
 public class REMS {
 	private double REMS_VERTICAL_WINDSPEED_MIN;
