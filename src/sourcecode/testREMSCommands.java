@@ -1,9 +1,17 @@
 package sourcecode;
 
+import java.util.Scanner;
+
 public class testREMSCommands {
 
 	public static void main(String[] args) {
 		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter A Command");
+		String command = sc.nextLine();
+
+	
 		REMSCommands commands = new REMSCommands(Commands.REMS_GROUDTEMP_MIN);
 		commands.remsCommands();
 		
