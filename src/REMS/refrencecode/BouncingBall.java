@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/REMS/rems-testmain/BouncingBall.java
-
-=======
 package REMS.refrencecode;
->>>>>>> Sunil-Branch:src/REMS/refrencecode/BouncingBall.java
 
 import java.applet.AudioClip;
 import java.awt.BasicStroke;
