@@ -1,15 +1,16 @@
-package pratik;
+package REMS.refrencecode;
 
-   import java.awt.*;
-import java.awt.Image;
-import java.awt.event.*;
-
-import javax.swing.*;
-
-import java.util.*;
-import java.awt.geom.*;
 import java.applet.AudioClip;
-import java.net.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.geom.Line2D;
+
+import javax.swing.JPanel;
 
 public class BouncingBall extends JPanel implements Runnable, KeyListener {
 	// Set up variables

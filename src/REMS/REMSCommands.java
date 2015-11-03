@@ -65,6 +65,9 @@ public class REMSCommands {
 		case REMS_HUMIDITY_MAX: 
 			System.out.println("Command Called: REMS_HUMIDITY_MAX");
 			break;
+		
+		default: 
+			System.out.println("Command doesn't exist");
 		}
 	}
 	
