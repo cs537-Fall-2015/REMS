@@ -12,16 +12,16 @@ public class testREMSCommands {
 //		String command = sc.nextLine();
 
 	
-		REMSCommands commands = new REMSCommands(Commands.REMS_GROUDTEMP_MIN);
+		REMSCommands commands = new REMSCommands(TestCommands.REMS_GROUDTEMP_MIN);
 		commands.remsCommands();
 		
-		REMSCommands commands1 = new REMSCommands(Commands.REMS_ULTRAVIOLET);
+		REMSCommands commands1 = new REMSCommands(TestCommands.REMS_ULTRAVIOLET);
 		commands1.remsCommands();
 		
-		REMSCommands commands2 = new REMSCommands(Commands.REMS_AIRTEMP_MIN);
+		REMSCommands commands2 = new REMSCommands(TestCommands.REMS_AIRTEMP_MIN);
 		commands2.remsCommands();
 		
-		REMSCommands commands3 = new REMSCommands(Commands.REMS_WINDSPEED_MIN);
+		REMSCommands commands3 = new REMSCommands(TestCommands.REMS_WINDSPEED_MIN);
 		commands3.remsCommands();
 
 	}

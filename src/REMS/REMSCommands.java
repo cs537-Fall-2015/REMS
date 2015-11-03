@@ -2,14 +2,14 @@ package REMS;
 
 public class REMSCommands {
 	
-	Commands commands;
+	TestCommands testCommands;
 	
-	public REMSCommands(Commands commands) {
-		this.commands = commands;
+	public REMSCommands(TestCommands testCommands) {
+		this.testCommands = testCommands;
 	}
 	
 	public void remsCommands() {
-		switch (commands) {
+		switch (testCommands) {
 		case REMS_WINDSPEED_MIN: 
 			System.out.println("Command Called: REMS_WINDSPEED_MIN");
 			break;
