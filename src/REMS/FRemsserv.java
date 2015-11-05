@@ -18,7 +18,8 @@ public class FRemsserv {
 
 			Socket con = ss.accept();
 
-			System.out.println("Just connected to " + con.getRemoteSocketAddress());
+			System.out.println("Just connected to "
+					+ con.getRemoteSocketAddress());
 
 			DataInputStream in = new DataInputStream(con.getInputStream());
 			System.out.println("created datastream");
@@ -28,9 +29,6 @@ public class FRemsserv {
 			System.out.println("message from client  is :" + cmdfromclient);
 
 			DataOutputStream out = new DataOutputStream(con.getOutputStream());
-
-			// out.writeUTF("Thank you for connecting to "+
-			// con.getLocalSocketAddress() + "\nGoodbye!");
 
 			Commands cmd = new Commands();
 
