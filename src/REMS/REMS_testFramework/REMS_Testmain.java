@@ -18,16 +18,6 @@ public class REMS_Testmain {
 
 			System.out.println("Just connected to client " + client.getRemoteSocketAddress());
 
-			// OutputStream outToServer = client.getOutputStream();
-			//
-			// DataOutputStream out = new DataOutputStream(outToServer);
-			//
-			// out.writeUTF("this Rems client "+client.getLocalAddress());
-			//
-			// InputStream inFromServer = client.getInputStream();
-			// DataInputStream in = new DataInputStream(inFromServer);
-			// System.out.println("Server says " + in.readUTF());
-
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 
 			System.out.println("enter mesaage for server");
