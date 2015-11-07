@@ -1,11 +1,9 @@
-package main;
+package REMS.refrencecode;
 
 import generic.RoverThreadHandler;
 
 import java.io.IOException;
 
-import REMS.refrencecode.REMSClient;
-import REMS.refrencecode.REMSServer;
 
 public class RemsMain {
 
