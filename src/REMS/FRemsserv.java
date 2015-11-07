@@ -15,53 +15,13 @@ public class FRemsserv {
 		// port to establish the connection on
 		int port = 3656;
 
-<<<<<<< HEAD
-		try {
-			ServerSocket ss = new ServerSocket(port);
-
-			System.out.println("waiting to connect ");
-
-			Socket con = ss.accept();
-
-			System.out.println("Just connected to "
-					+ con.getRemoteSocketAddress());
-=======
 		// Record the timestamp of the client connection
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
 		Date date = new Date();
->>>>>>> refs/remotes/origin/Sunil-Branch
 
 		String cmdFromClient = "";
 		Socket con = null;
 
-<<<<<<< HEAD
-			String cmdfromclient = in.readUTF().toString();
-
-			System.out.println("message from client  is :" + cmdfromclient);
-
-			DataOutputStream out = new DataOutputStream(con.getOutputStream());
-
-			Commands cmd = new Commands();
-
-			if (cmdfromclient.equalsIgnoreCase("maxspeed")) {
-				out.writeUTF("MAX SPEED " + cmd.windmax);
-				// System.out.println(" MAX SPEED "+cmd.windmax);
-			}
-
-			else if (cmdfromclient.equalsIgnoreCase("minspeed")) {
-				out.writeUTF("MAX SPEED " + cmd.windmin);
-
-				// System.out.println(" MIN SPEED "+cmd.windmin);
-			} else if (cmdfromclient.equalsIgnoreCase("speed")) {
-				out.writeUTF("MAX SPEED " + cmd.getWindspeed());
-
-				// System.out.println(" SPEED "+cmd.getWindspeed());
-			}
-
-			else {
-				out.writeUTF("eneter proper command ");
-				out.writeUTF("1)maxspeed\n2)minspeed \n3) speed");
-=======
 		try {
 			// Establish a serversocket on a specified port
 			ServerSocket ss = new ServerSocket(port);
@@ -103,7 +63,6 @@ public class FRemsserv {
 						out.writeUTF("Invalid Command");
 					}
 				}
->>>>>>> refs/remotes/origin/Sunil-Branch
 			}
 			// catch any exceptions
 		} catch (Exception e) {
