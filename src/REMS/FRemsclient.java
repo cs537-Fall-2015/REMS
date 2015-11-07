@@ -36,17 +36,21 @@ public class FRemsclient {
 					out.writeUTF(msg);
 
 					String msgfromserver = in.readUTF().toString().toUpperCase();
-					System.out.println("Response From Server: " + msgfromserver);
+					System.out.println("Response From Server: " + msgfromserver.toUpperCase());
 
 					break;
 				}
 
 				out.writeUTF(msg);
-				System.out.println("Command Sent");
+				System.out.println("Command Sent for processing");
 
 				String msgfromserver = in.readUTF().toString().toUpperCase();
-
+				
 				System.out.println("\nResponse From Server: " + msgfromserver);
+				
+				String msgfromserver2 = in.readUTF().toString().toUpperCase();
+
+				System.out.println("\nResponse From Server: " + msgfromserver2);
 
 			}
 		} catch (IOException e) {

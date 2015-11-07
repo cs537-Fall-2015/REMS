@@ -42,7 +42,7 @@ public class FRemsserv {
 				// Store the command from the client
 				while ((cmdFromClient = in.readUTF().toString()) != null) {
 										
-					System.out.println("Message from client: " + cmdFromClient);
+					System.out.println("Message from client: " + cmdFromClient.toUpperCase());
 
 					// Data output stream to write data to the client
 					DataOutputStream out = new DataOutputStream(con.getOutputStream());
@@ -51,16 +51,40 @@ public class FRemsserv {
 					Commands cmd = new Commands();
 
 					// check if the command is valid
-					if (cmdFromClient.equalsIgnoreCase("maxspeed")) {
-						out.writeUTF("MAX SPEED " + cmd.windmax);
-					} else if (cmdFromClient.equalsIgnoreCase("minspeed")) {
-						out.writeUTF("MAX SPEED " + cmd.windmin);
-					} else if (cmdFromClient.equalsIgnoreCase("speed")) {
-						out.writeUTF("MAX SPEED " + cmd.getWindspeed());
+					if (cmdFromClient.equalsIgnoreCase("REMS_WINDSPEED_MAX")) {
+						out.writeUTF("MAX WINDSPEED IS BEING CALCULATED. Please Wait..");
+						Thread.sleep(5000);
+						out.writeUTF("CALCULATED MAX SPEED " + cmd.getWindmax());
+					} else if (cmdFromClient.equalsIgnoreCase("REMS_WINDSPEED_MIN")) {
+						out.writeUTF("MIN WINDSPEED IS BEING CALCULATED. Please Wait..");
+						Thread.sleep(4000);
+						out.writeUTF("CALCULATED MIN SPEED " + cmd.getWindmin());
+					} else if (cmdFromClient.equalsIgnoreCase("REMS_WINDSPEED")) {
+						out.writeUTF("WINDSPEED IS BEING CALCULATED. Please Wait..");
+						Thread.sleep(2000);
+						out.writeUTF("CALCULATED SPEED " + cmd.getWindspeed());
 					} else if (cmdFromClient.equalsIgnoreCase("exit")) {
 						out.writeUTF("Connection Terminated");
-					} else {
+						out.writeUTF("Exit");
+					} else if (cmdFromClient.equalsIgnoreCase("Command List")) {
+						out.writeUTF("\n\tREMS_WINDSPEED_MIN,"
+									+ "\tREMS_WINDSPEED_MAX"
+									+ "\tREMS_WINDSPEED"
+									+ "\n\tREMS_GROUDTEMP_MIN"
+									+ "\tREMS_GROUNDTEMP_MAX"
+									+ "\tREMS_GROUNDTEMP"
+									+ "\n\tREMS_AIRTEMP"
+									+ "\t\tREMS_AIRTEMP_MIN"
+									+ "\tREMS_AIRTEMP_MAX"
+									+ "\n\tREMS_PRESSURE"
+									+ "\t\tREMS_ULTRAVIOLET"
+									+ "\n\tREMS_HUMIDITY"
+									+ "\t\tREMS_HUMIDITY_MIN"
+									+ "\tREMS_HUMIDITY_MAX");
+						out.writeUTF("");
+					}else {
 						out.writeUTF("Invalid Command");
+						out.writeUTF("");
 					}
 				}
 			}
