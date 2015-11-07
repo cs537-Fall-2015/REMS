@@ -39,12 +39,9 @@ public class FRemsserv {
 				System.out.println("Created Datastream to read input");
 
 				
-
+				// Store the command from the client
 				while ((cmdFromClient = in.readUTF().toString()) != null) {
-					
-					// Store the command from the client
-					
-					
+										
 					System.out.println("Message from client: " + cmdFromClient);
 
 					// Data output stream to write data to the client
