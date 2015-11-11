@@ -5,80 +5,133 @@ import java.util.Scanner;
 
 public class Commands {
 
-	private int windmax = 100;
-	private int windmin = 45;
-	private int windspeed;
-
-	public int getWindmax() {
-		return windmax;
+	private int REMS_WINDSPEED_MAX = 100;
+	private int REMS_WINDSPEED_MIN = 45;
+	private int REMS_WINDSPEED;
+	private int REMS_GROUDTEMP_MIN;
+	private int REMS_GROUNDTEMP_MAX;
+	private int REMS_GROUNDTEMP;
+	private int REMS_AIRTEMP;
+	private int REMS_AIRTEMP_MIN;
+	private int REMS_AIRTEMP_MAX;
+	private int REMS_PRESSURE;
+	private int REMS_ULTRAVIOLET;
+	private int REMS_HUMIDITY;
+	private int REMS_HUMIDITY_MIN;
+	private int REMS_HUMIDITY_MAX;
+	
+	
+	public int getREMS_WINDSPEED_MAX() {
+		return REMS_WINDSPEED_MAX;
+	}
+	public void setREMS_WINDSPEED_MAX(int rEMS_WINDSPEED_MAX) {
+		REMS_WINDSPEED_MAX = rEMS_WINDSPEED_MAX;
 	}
 	
-	public void setWindMax (int windmax) {
-		this.windmax = windmax;
+	
+	public int getREMS_WINDSPEED_MIN() {
+		return REMS_WINDSPEED_MIN;
 	}
-
-	public int getWindmin() {
-		return windmin;
+	public void setREMS_WINDSPEED_MIN(int rEMS_WINDSPEED_MIN) {
+		REMS_WINDSPEED_MIN = rEMS_WINDSPEED_MIN;
 	}
 	
-	public void setWindMin(int windmin) {
-		this.windmin = windmin;
-	}
-
-	public int getWindspeed() {
-
+	
+	public int getREMS_WINDSPEED() {
+		
 		Random r = new Random();
-		int windspeed = r.nextInt(windmax - windmin) + windmin;
-		return windspeed;
+		int getREMS_WINDSPEED = r.nextInt(getREMS_WINDSPEED_MAX() - getREMS_WINDSPEED_MIN()) + getREMS_WINDSPEED_MIN();
+		return getREMS_WINDSPEED;
 	}
-
-/*	void startup() {
-		int count = 0;
-
-		System.out.println("1)MINIMUM SPEED \n2)WIND SPEED \n3) MAXIMUM SPEED");
-		System.out.println("enter command choice \n ");
-
-		Scanner scaner = new Scanner(System.in);
-
-		int choice = scaner.nextInt();
-
-		switch (choice) {
-		case 1:
-			System.out.println("MINwind speed is :" + this.getWindmin());
-
-			break;
-
-		case 2:
-			System.out.println("wind speed is :" + this.getWindspeed());
-
-			break;
-
-		case 3:
-			System.out.println("maximum is :" + this.getWindmax());
-
-			break;
-
-		}
-
+	public void setREMS_WINDSPEED(int rEMS_WINDSPEED) {
+		REMS_WINDSPEED = rEMS_WINDSPEED;
 	}
-
-	public static void main(String args[]) {
-		Commands comand = new Commands();
-		comand.startup();
-		System.out.println("press 1 to continue");
-		Scanner scaner = new Scanner(System.in);
-
-		int c = scaner.nextInt();
-		switch (c) {
-		case 1:
-			comand.startup();
-			break;
-
-		default:
-			System.out.println("exited");
-			break;
-		}
-
+	
+	
+	public int getREMS_GROUDTEMP_MIN() {
+		return REMS_GROUDTEMP_MIN;
 	}
- */
+	public void setREMS_GROUDTEMP_MIN(int rEMS_GROUDTEMP_MIN) {
+		REMS_GROUDTEMP_MIN = rEMS_GROUDTEMP_MIN;
+	}
+	
+	
+	public int getREMS_GROUNDTEMP_MAX() {
+		return REMS_GROUNDTEMP_MAX;
+	}
+	public void setREMS_GROUNDTEMP_MAX(int rEMS_GROUNDTEMP_MAX) {
+		REMS_GROUNDTEMP_MAX = rEMS_GROUNDTEMP_MAX;
+	}
+	
+	
+	public int getREMS_GROUNDTEMP() {
+		return REMS_GROUNDTEMP;
+	}
+	public void setREMS_GROUNDTEMP(int rEMS_GROUNDTEMP) {
+		REMS_GROUNDTEMP = rEMS_GROUNDTEMP;
+	}
+	
+	
+	public int getREMS_AIRTEMP() {
+		return REMS_AIRTEMP;
+	}
+	public void setREMS_AIRTEMP(int rEMS_AIRTEMP) {
+		REMS_AIRTEMP = rEMS_AIRTEMP;
+	}
+	
+	
+	public int getREMS_AIRTEMP_MIN() {
+		return REMS_AIRTEMP_MIN;
+	}
+	public void setREMS_AIRTEMP_MIN(int rEMS_AIRTEMP_MIN) {
+		REMS_AIRTEMP_MIN = rEMS_AIRTEMP_MIN;
+	}
+	
+	
+	public int getREMS_AIRTEMP_MAX() {
+		return REMS_AIRTEMP_MAX;
+	}
+	public void setREMS_AIRTEMP_MAX(int rEMS_AIRTEMP_MAX) {
+		REMS_AIRTEMP_MAX = rEMS_AIRTEMP_MAX;
+	}
+	
+	
+	public int getREMS_PRESSURE() {
+		return REMS_PRESSURE;
+	}
+	public void setREMS_PRESSURE(int rEMS_PRESSURE) {
+		REMS_PRESSURE = rEMS_PRESSURE;
+	}
+	
+	
+	public int getREMS_ULTRAVIOLET() {
+		return REMS_ULTRAVIOLET;
+	}
+	public void setREMS_ULTRAVIOLET(int rEMS_ULTRAVIOLET) {
+		REMS_ULTRAVIOLET = rEMS_ULTRAVIOLET;
+	}
+	
+	
+	public int getREMS_HUMIDITY() {
+		return REMS_HUMIDITY;
+	}
+	public void setREMS_HUMIDITY(int rEMS_HUMIDITY) {
+		REMS_HUMIDITY = rEMS_HUMIDITY;
+	}
+	
+	
+	public int getREMS_HUMIDITY_MIN() {
+		return REMS_HUMIDITY_MIN;
+	}
+	public void setREMS_HUMIDITY_MIN(int rEMS_HUMIDITY_MIN) {
+		REMS_HUMIDITY_MIN = rEMS_HUMIDITY_MIN;
+	}
+	
+	
+	public int getREMS_HUMIDITY_MAX() {
+		return REMS_HUMIDITY_MAX;
+	}
+	public void setREMS_HUMIDITY_MAX(int rEMS_HUMIDITY_MAX) {
+		REMS_HUMIDITY_MAX = rEMS_HUMIDITY_MAX;
+	}
 }
