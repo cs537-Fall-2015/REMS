@@ -6,7 +6,7 @@ import java.io.*;
 public class CommandsRead {
 
 	
-	static String path="C:/Users/daxesh/Documents/cmdline.txt";
+	static String path="C:/Users/daxesh/Documents/GitHub/REMS/src/REMS/cmdline.txt";
 	static String cmd[] = new String[10];
 	
 	
