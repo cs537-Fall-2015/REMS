@@ -1,17 +1,25 @@
 package REMS;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FRemsserv {
-
+	
+	
+	@SuppressWarnings("resource")
 	public static void main(String args[]) throws IOException {
+		
+		List<String> listOfCommands = new ArrayList<String>();
+
 		// port to establish the connection on
 		int port = 3656;
 
@@ -19,7 +27,6 @@ public class FRemsserv {
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
 		Date date = new Date();
 
-		String cmdFromClient = "";
 		Socket con = null;
 
 		try {
@@ -35,14 +42,17 @@ public class FRemsserv {
 						+ dateFormat.format(date));
 
 				// Data input steam to read the incoming data from the client
-				DataInputStream in = new DataInputStream(con.getInputStream());
 				System.out.println("Created Datastream to read input");
 
-				
+				for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
+				    for (String part : line.split("\\s")) {
+				        listOfCommands.add(part);
+				    }
+				}
 				// Store the command from the client
-				while ((cmdFromClient = in.readUTF().toString()) != null) {
-										
-					System.out.println("Message from client: " + cmdFromClient.toUpperCase());
+			//	while ((cmdFromClient = in.readUTF().toString()) != null) {
+				for (int i = 0; i < listOfCommands.size(); i++) {
+					System.out.println("Message from client: " + listOfCommands.get(i));
 
 					// Data output stream to write data to the client
 					DataOutputStream out = new DataOutputStream(con.getOutputStream());
@@ -51,40 +61,51 @@ public class FRemsserv {
 					Commands cmd = new Commands();
 
 					// check if the command is valid
-					if (cmdFromClient.equalsIgnoreCase("REMS_WINDSPEED_MAX")) {
-						out.writeUTF("MAX WINDSPEED IS BEING CALCULATED. Please Wait..");
-						Thread.sleep(5000);
-						out.writeUTF("CALCULATED MAX SPEED " + cmd.getWindmax());
-					} else if (cmdFromClient.equalsIgnoreCase("REMS_WINDSPEED_MIN")) {
-						out.writeUTF("MIN WINDSPEED IS BEING CALCULATED. Please Wait..");
-						Thread.sleep(4000);
-						out.writeUTF("CALCULATED MIN SPEED " + cmd.getWindmin());
-					} else if (cmdFromClient.equalsIgnoreCase("REMS_WINDSPEED")) {
-						out.writeUTF("WINDSPEED IS BEING CALCULATED. Please Wait..");
-						Thread.sleep(2000);
-						out.writeUTF("CALCULATED SPEED " + cmd.getWindspeed());
-					} else if (cmdFromClient.equalsIgnoreCase("exit")) {
-						out.writeUTF("Connection Terminated");
-						out.writeUTF("Exit");
-					} else if (cmdFromClient.equalsIgnoreCase("Command List")) {
-						out.writeUTF("\n\tREMS_WINDSPEED_MIN,"
-									+ "\tREMS_WINDSPEED_MAX"
-									+ "\tREMS_WINDSPEED"
-									+ "\n\tREMS_GROUDTEMP_MIN"
-									+ "\tREMS_GROUNDTEMP_MAX"
-									+ "\tREMS_GROUNDTEMP"
-									+ "\n\tREMS_AIRTEMP"
-									+ "\t\tREMS_AIRTEMP_MIN"
-									+ "\tREMS_AIRTEMP_MAX"
-									+ "\n\tREMS_PRESSURE"
-									+ "\t\tREMS_ULTRAVIOLET"
-									+ "\n\tREMS_HUMIDITY"
-									+ "\t\tREMS_HUMIDITY_MIN"
-									+ "\tREMS_HUMIDITY_MAX");
-						out.writeUTF("");
-					}else {
+					switch (listOfCommands.get(i)) {
+					case "REMS_WINDSPEED_MIN":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN WIND SPEED " + cmd.getREMS_WINDSPEED_MIN());
+						break;
+					case "REMS_WINDSPEED":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED WIND SPEED " + cmd.getREMS_WINDSPEED());
+						break;
+					case "REMS_WINDSPEED_MAX":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX WIND SPEED " + cmd.getREMS_WINDSPEED_MAX());
+						break;
+					case "REMS_GROUDTEMP_MIN":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN GROUND TEMPERATURE " + cmd.getREMS_GROUDTEMP_MIN());
+						break;
+					case "REMS_GROUNDTEMP_MAX":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX GROUND TEMPERATURE " + cmd.getREMS_GROUNDTEMP_MAX());
+						break;
+					case "REMS_GROUNDTEMP":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED GROUND TEMPERATURE " + cmd.getREMS_GROUNDTEMP());
+						break;
+					case "REMS_AIRTEMP":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED AIR TEMPERATURE " + cmd.getREMS_AIRTEMP());
+						break;
+					case "REMS_AIRTEMP_MIN":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN AIR TEMPERATURE " + cmd.getREMS_AIRTEMP_MIN());
+						break;
+					case "REMS_AIRTEMP_MAX":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX AIR TEMPERATURE " + cmd.getREMS_AIRTEMP_MAX());
+						break;
+					case "REMS_PRESSURE":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED PRESSURE " + cmd.getREMS_PRESSURE());
+						break;
+					case "REMS_ULTRAVIOLET":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED ULTRAVIOLET " + cmd.getREMS_ULTRAVIOLET());
+						break;
+					case "REMS_HUMIDITY":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED HUMIDITY " + cmd.getREMS_HUMIDITY());
+						break;
+					case "REMS_HUMIDITY_MIN":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN HUMIDITY " + cmd.getREMS_HUMIDITY_MIN());
+						break;
+					case "REMS_HUMIDITY_MAX":
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX HUMIDITY" + cmd.getREMS_HUMIDITY_MAX());
+						break;
+					default:
 						out.writeUTF("Invalid Command");
-						out.writeUTF("");
 					}
 				}
 			}

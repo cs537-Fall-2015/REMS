@@ -1,21 +1,28 @@
 package REMS;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FRemsclient {
 
 	public static void main(String[] args) throws IOException {
 		int port = 3656;
 		Socket client = null;
-		Scanner scan = new Scanner(System.in);
-		String msg = null;
+		
+		List<String> listOfCommands = new ArrayList<String>();
+		
+		String msgFromServer;
+
+		
 		try {
 			client = new Socket("localhost", port);
 
@@ -23,41 +30,53 @@ public class FRemsclient {
 
 			System.out.println("Connection Established: " + client.getRemoteSocketAddress());
 
-			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 			DataInputStream in = new DataInputStream(client.getInputStream());
+	
+			
+			System.out.println("Command Sent for processing");
 
-			while (msg != "exit") {
-
-				System.out.print("Enter A Command: ");
-
-				msg = scan.nextLine();
-
-				if (msg.equalsIgnoreCase("exit")) {
-					out.writeUTF(msg);
-
-					String msgfromserver = in.readUTF().toString().toUpperCase();
-					System.out.println("Response From Server: " + msgfromserver.toUpperCase());
-
-					break;
+			while((msgFromServer = in.readUTF().toString().toUpperCase()) != null) {
+				
+			listOfCommands.add(msgFromServer);
+												
+				System.out.println("\nResponse From Server: " + msgFromServer);
+				
+				for (String list: listOfCommands) {
+					System.out.println(" Added To ArrayList: " + list);
 				}
-
-				out.writeUTF(msg);
-				System.out.println("Command Sent for processing");
-
-				String msgfromserver = in.readUTF().toString().toUpperCase();
 				
-				System.out.println("\nResponse From Server: " + msgfromserver);
-				
-				String msgfromserver2 = in.readUTF().toString().toUpperCase();
-
-				System.out.println("\nResponse From Server: " + msgfromserver2);
-
+				AddToFile(listOfCommands);
+				System.out.println("Done");	
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(e.getLocalizedMessage());
 		} finally {
-			client.close();
+			client.close();			
+		}	
+	}
+
+	private static void AddToFile(List<String> listOfCommands) throws IOException {
+
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
+		Date date = new Date();
+		
+		File file = new File("P:/CS_537/REMS_Workspace/REMS/ServerOutput.txt");
+		
+		if (!file.exists()) {
+			file.createNewFile();
 		}
+		
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+		
+		bw.write("==================== " +  dateFormat.format(date) + " ====================\n");
+		for (String list: listOfCommands) {
+			bw.write(list + "\n");
+		}
+		bw.write("===================================================================\n");
+
+		bw.close();
+		
 	}
 }

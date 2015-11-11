@@ -1,77 +1,72 @@
 package REMS.REMS_testFramework;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import REMS.Commands;
+import java.util.ArrayList;
+import java.util.List;
 
 public class REMS_Testmain {
 
 	public static void main(String[] args) throws IOException {
-		// port to establish the connection on
 		int port = 3656;
+		Socket client = null;
 
-		// Record the timestamp of the client connection
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
-		Date date = new Date();
+		List<String> listOfCommands = new ArrayList<String>();
 
-		String cmdFromClient = "";
-		Socket con = null;
+		String msgFromServer;
 
 		try {
-			// Establish a serversocket on a specified port
-			ServerSocket ss = new ServerSocket(port);
-			System.out.println("Waiting for client to request a connection.. ");
+			client = new Socket("localhost", port);
 
-			// Accept the connection from a client
-			while (true) {
+			System.out.println("Connecting to server on port " + port);
 
-				con = ss.accept();
-				System.out.println("Connection Established to: " + con.getRemoteSocketAddress() + "\nTimestamp: "
-						+ dateFormat.format(date));
+			System.out.println("Connection Established: " + client.getRemoteSocketAddress());
 
-				// Data input steam to read the incoming data from the client
-				DataInputStream in = new DataInputStream(con.getInputStream());
-				System.out.println("Created Datastream to read input");
+			DataInputStream in = new DataInputStream(client.getInputStream());
 
-				// Store the command from the client
-				while ((cmdFromClient = in.readUTF().toString()) != null) {
+			System.out.println("Command Sent for processing");
 
-					System.out.println("Message from client: " + cmdFromClient);
+			while ((msgFromServer = in.readUTF().toString().toUpperCase()) != null) {
 
-					// Data output stream to write data to the client
-					DataOutputStream out = new DataOutputStream(con.getOutputStream());
+				listOfCommands.add(msgFromServer);
 
-					// Created an object of commands
-					Commands cmd = new Commands();
+				System.out.println("\nResponse From Server: " + msgFromServer);
 
-					// check if the command is valid
-					if (cmdFromClient.equalsIgnoreCase("maxspeed")) {
-						out.writeUTF("MAX SPEED " + cmd.getWindmax());
-					} else if (cmdFromClient.equalsIgnoreCase("minspeed")) {
-						out.writeUTF("MAX SPEED " + cmd.getWindmin());
-					} else if (cmdFromClient.equalsIgnoreCase("speed")) {
-						out.writeUTF("MAX SPEED " + cmd.getWindspeed());
-					} else if (cmdFromClient.equalsIgnoreCase("exit")) {
-						out.writeUTF("Connection Terminated");
-					} else {
-						out.writeUTF("Invalid Command");
-					}
+				for (String list : listOfCommands) {
+					System.out.println(" Added To ArrayList: " + list);
 				}
+
+				AddToFile(listOfCommands);
+				System.out.println("Done");
 			}
-			// catch any exceptions
-		} catch (Exception e) {
+		} catch (IOException e) {
+			e.printStackTrace();
 			System.out.println(e.getLocalizedMessage());
 		} finally {
-			// close the connection
-			con.close();
+			client.close();
 		}
 	}
 
+	private static void AddToFile(List<String> listOfCommands) throws IOException {
+
+		File file = new File("P:/CS_537/REMS_Workspace/REMS/ServerOutput.txt");
+
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+
+		for (String list : listOfCommands) {
+			bw.write(list + "\n");
+		}
+
+		bw.close();
+
+	}
 }
