@@ -1,72 +1,31 @@
 package REMS.REMS_testFramework;
 
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileWriter;
+
 import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import REMS.FRemsclient2;
+import REMS.FRemsserv2;
 
 public class REMS_Testmain {
 
 	public static void main(String[] args) throws IOException {
-		int port = 3656;
-		Socket client = null;
 
-		List<String> listOfCommands = new ArrayList<String>();
-
-		String msgFromServer;
+		// Each module has its own port
+		int port = 9001;
 
 		try {
-			client = new Socket("localhost", port);
-
-			System.out.println("Connecting to server on port " + port);
-
-			System.out.println("Connection Established: " + client.getRemoteSocketAddress());
-
-			DataInputStream in = new DataInputStream(client.getInputStream());
-
-			System.out.println("Command Sent for processing");
-
-			while ((msgFromServer = in.readUTF().toString().toUpperCase()) != null) {
-
-				listOfCommands.add(msgFromServer);
-
-				System.out.println("\nResponse From Server: " + msgFromServer);
-
-				for (String list : listOfCommands) {
-					System.out.println(" Added To ArrayList: " + list);
-				}
-
-				AddToFile(listOfCommands);
-				System.out.println("Done");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+			FRemsserv2 serverOne = new FRemsserv2("localhost", port);
+			serverOne.start();
+			
+			System.out.println("The Server Has Been Started");
+			System.out.println("The Client Will Start in 3 sec");
+			
+			Thread.sleep(3000);
+			FRemsclient2 clientOne = new FRemsclient2("localhost", port);
+			clientOne.start();
+			System.out.println("The Client Has Been Connected");
+			
+		}catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
-		} finally {
-			client.close();
-		}
-	}
-
-	private static void AddToFile(List<String> listOfCommands) throws IOException {
-
-		File file = new File("P:/CS_537/REMS_Workspace/REMS/ServerOutput.txt");
-
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-
-		FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		BufferedWriter bw = new BufferedWriter(fw);
-
-		for (String list : listOfCommands) {
-			bw.write(list + "\n");
-		}
-
-		bw.close();
-
+		} 
 	}
 }
