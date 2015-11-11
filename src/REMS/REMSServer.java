@@ -12,23 +12,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FRemsserv {
+public class REMSServer extends Thread{
 	
+	private String host;
+	private int port;
 	
-	@SuppressWarnings("resource")
-	public static void main(String args[]) throws IOException {
-		
-		List<String> listOfCommands = new ArrayList<String>();
+	List<String> listOfCommands = new ArrayList<String>();
 
-		// port to establish the connection on
-		int port = 3656;
+	// Record the timestamp of the client connection
+	DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
+	Date date = new Date();
 
-		// Record the timestamp of the client connection
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
-		Date date = new Date();
-
-		Socket con = null;
-
+	Socket con = null;
+	
+	public REMSServer(String host, int port) {
+		this.host = host;
+		this.port = port;
+	}
+	
+	public void run() {
 		try {
 			// Establish a serversocket on a specified port
 			ServerSocket ss = new ServerSocket(port);
@@ -102,7 +104,7 @@ public class FRemsserv {
 						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN HUMIDITY " + cmd.getREMS_HUMIDITY_MIN());
 						break;
 					case "REMS_HUMIDITY_MAX":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX HUMIDITY" + cmd.getREMS_HUMIDITY_MAX());
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX HUMIDITY " + cmd.getREMS_HUMIDITY_MAX());
 						break;
 					default:
 						out.writeUTF("Invalid Command");
@@ -114,9 +116,11 @@ public class FRemsserv {
 			System.out.println(e.getLocalizedMessage());
 		} finally {
 			// close the connection
-			con.close();
+			try {
+				con.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
 	}
-
 }

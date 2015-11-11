@@ -1,4 +1,4 @@
-package REMS;
+package REMS.refrencecode;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,25 +12,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FRemsserv2 extends Thread{
-	
-	private String host;
-	private int port;
-	
-	List<String> listOfCommands = new ArrayList<String>();
+import REMS.Commands;
 
-	// Record the timestamp of the client connection
-	DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
-	Date date = new Date();
+public class FRemsserv {
+	
+	
+	@SuppressWarnings("resource")
+	public static void main(String args[]) throws IOException {
+		
+		List<String> listOfCommands = new ArrayList<String>();
 
-	Socket con = null;
-	
-	public FRemsserv2(String host, int port) {
-		this.host = host;
-		this.port = port;
-	}
-	
-	public void run() {
+		// port to establish the connection on
+		int port = 3656;
+
+		// Record the timestamp of the client connection
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
+		Date date = new Date();
+
+		Socket con = null;
+
 		try {
 			// Establish a serversocket on a specified port
 			ServerSocket ss = new ServerSocket(port);
@@ -116,11 +116,9 @@ public class FRemsserv2 extends Thread{
 			System.out.println(e.getLocalizedMessage());
 		} finally {
 			// close the connection
-			try {
-				con.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			con.close();
 		}
+
 	}
+
 }

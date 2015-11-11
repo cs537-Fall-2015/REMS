@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FRemsclient2 extends Thread{
+public class REMSClient extends Thread{
 
 	private String host;
 	private int port;
 	
-	public FRemsclient2(String host, int port) {
+	public REMSClient(String host, int port) {
 		this.host = host;
 		this.port = port;
 	}
@@ -48,13 +48,13 @@ public class FRemsclient2 extends Thread{
 				System.out.println("\nResponse From Server: " + msgFromServer);
 				
 				AddToFile(listOfCommands);
-				System.out.println("Done");	
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(e.getLocalizedMessage());
 		} finally {
-			try {
+			try {		
 				client.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -84,5 +84,6 @@ public class FRemsclient2 extends Thread{
 
 		bw.close();
 		
+		System.out.println("Done");	
 	}	
 }

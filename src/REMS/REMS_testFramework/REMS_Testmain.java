@@ -2,8 +2,8 @@ package REMS.REMS_testFramework;
 
 
 import java.io.IOException;
-import REMS.FRemsclient2;
-import REMS.FRemsserv2;
+import REMS.REMSClient;
+import REMS.REMSServer;
 
 public class REMS_Testmain {
 
@@ -13,14 +13,14 @@ public class REMS_Testmain {
 		int port = 9001;
 
 		try {
-			FRemsserv2 serverOne = new FRemsserv2("localhost", port);
+			REMSServer serverOne = new REMSServer("localhost", port);
 			serverOne.start();
 			
 			System.out.println("The Server Has Been Started");
 			System.out.println("The Client Will Start in 3 sec");
 			
 			Thread.sleep(3000);
-			FRemsclient2 clientOne = new FRemsclient2("localhost", port);
+			REMSClient clientOne = new REMSClient("localhost", port);
 			clientOne.start();
 			System.out.println("The Client Has Been Connected");
 			
