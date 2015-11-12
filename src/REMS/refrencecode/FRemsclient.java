@@ -2,10 +2,14 @@ package REMS.refrencecode;
 
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +35,25 @@ public class FRemsclient {
 			System.out.println("Connection Established: " + client.getRemoteSocketAddress());
 
 			DataInputStream in = new DataInputStream(client.getInputStream());
-	
+			DataOutputStream out = new DataOutputStream(client.getOutputStream());
+			
+			for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
+			    for (String part : line.split("\\s")) {
+			        listOfCommands.add(part);
+			    }
+			}
+			
+			for (String list: listOfCommands) {
+				System.out.println(list);
+			}
+			
+			ObjectOutputStream objectOutput = new ObjectOutputStream(client.getOutputStream());
+            objectOutput.writeObject(listOfCommands);
+			
+//			for (int i = 0; i < listOfCommands.size(); i++) {
+///				 out.writeUTF(listOfCommands.get(i));
+//			}
+
 			
 			System.out.println("Command Sent for processing");
 
