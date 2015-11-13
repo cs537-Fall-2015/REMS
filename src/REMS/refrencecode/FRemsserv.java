@@ -1,7 +1,9 @@
 package REMS.refrencecode;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
@@ -46,11 +48,30 @@ public class FRemsserv {
 				// Data input steam to read the incoming data from the client
 				System.out.println("Created Datastream to read input");
 
-				for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
+				DataInputStream in =  new DataInputStream(con.getInputStream());
+				 
+/*				for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
 				    for (String part : line.split("\\s")) {
 				        listOfCommands.add(part);
 				    }
+				} */
+				String cmdFromClient;
+				
+                ObjectInputStream objectInput = new ObjectInputStream(con.getInputStream()); //Error Line!
+                Object object = objectInput.readObject();
+                
+                listOfCommands =  (ArrayList<String>) object;
+                
+//                System.out.println(titleList.get(1));
+
+//                while ((cmdFromClient = in.readUTF().toString()) != null) {
+//					listOfCommands.add(cmdFromClient);
+//				}
+				
+				for (String list: listOfCommands) {
+					System.out.println(list);
 				}
+								
 				// Store the command from the client
 			//	while ((cmdFromClient = in.readUTF().toString()) != null) {
 				for (int i = 0; i < listOfCommands.size(); i++) {

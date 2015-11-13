@@ -13,15 +13,20 @@ public class REMS_Testmain {
 		int port = 9001;
 
 		try {
-			REMSServer serverOne = new REMSServer("localhost", port);
+			REMSServer serverOne = new REMSServer("192.168.0.2", port);
 			serverOne.start();
 			
 			System.out.println("The Server Has Been Started");
 			System.out.println("The Client Will Start in 3 sec");
 			
 			Thread.sleep(3000);
-			REMSClient clientOne = new REMSClient("localhost", port);
+			REMSClient clientOne = new REMSClient("192.168.0.2", port);
 			clientOne.start();
+			
+	//		REMSClient clientTwo = new REMSClient("localhost", port);
+	//		clientTwo.start();
+			
+			
 			System.out.println("The Client Has Been Connected");
 			
 		}catch (Exception e) {
