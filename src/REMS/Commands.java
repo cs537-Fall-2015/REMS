@@ -7,7 +7,6 @@ public class Commands {
 
 	private int REMS_WINDSPEED_MAX = 100;
 	private int REMS_WINDSPEED_MIN = 45;
-	private int REMS_WINDSPEED;
 	private int REMS_GROUDTEMP_MIN;
 	private int REMS_GROUNDTEMP_MAX;
 	private int REMS_GROUNDTEMP;
@@ -44,7 +43,6 @@ public class Commands {
 		return getREMS_WINDSPEED;
 	}
 	public void setREMS_WINDSPEED(int rEMS_WINDSPEED) {
-		REMS_WINDSPEED = rEMS_WINDSPEED;
 	}
 	
 	
