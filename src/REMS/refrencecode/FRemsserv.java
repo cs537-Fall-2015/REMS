@@ -112,9 +112,6 @@ public class FRemsserv {
 					case "REMS_AIRTEMP_MAX":
 						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX AIR TEMPERATURE " + cmd.getREMS_AIRTEMP_MAX());
 						break;
-					case "REMS_PRESSURE":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED PRESSURE " + cmd.getREMS_PRESSURE());
-						break;
 					case "REMS_ULTRAVIOLET":
 						out.writeUTF(listOfCommands.get(i) + ": CALCULATED ULTRAVIOLET " + cmd.getREMS_ULTRAVIOLET());
 						break;

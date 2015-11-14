@@ -50,8 +50,7 @@ public class REMSClient extends Thread{
 			    }
 			}
 			
-			
-			
+		
 			ObjectOutputStream objectOutput = new ObjectOutputStream(client.getOutputStream());
             objectOutput.writeObject(listOfCommands);
 
@@ -100,6 +99,5 @@ public class REMSClient extends Thread{
 
 		bw.close();
 		
-		System.out.println("Done");	
 	}	
 }
