@@ -44,7 +44,7 @@ public class REMSClient extends Thread{
 			DataInputStream in = new DataInputStream(client.getInputStream());
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 			
-			for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
+			for (String line : Files.readAllLines(Paths.get("M:/S/Courses/CS537/workspace/REMS/Commands.txt"))) {
 			    for (String part : line.split("\\s")) {
 			        listOfCommands.add(part);
 			    }
@@ -82,7 +82,7 @@ public class REMSClient extends Thread{
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
 		Date date = new Date();
 		
-		File file = new File("P:/CS_537/REMS_Workspace/REMS/ServerOutput.txt");
+		File file = new File("M:/S/Courses/CS537/workspace/REMS/ServerOutput.txt");
 		
 		if (!file.exists()) {
 			file.createNewFile();
