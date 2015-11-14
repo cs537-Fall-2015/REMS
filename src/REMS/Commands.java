@@ -37,7 +37,7 @@ public class Commands {
 		return REMS_WINDSPEED;
 	}
 	public void setREMS_WINDSPEED(int rEMS_WINDSPEED) {
-		REMS_WINDSPEED = rEMS_WINDSPEED;
+		this.REMS_WINDSPEED = rEMS_WINDSPEED;
 	}
 	
 	
