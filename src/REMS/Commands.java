@@ -1,12 +1,9 @@
 package REMS;
 
-import java.util.Random;
-import java.util.Scanner;
-
 public class Commands {
 
-	private int REMS_WINDSPEED_MAX = 100;
-	private int REMS_WINDSPEED_MIN = 45;
+	private int REMS_WINDSPEED_MAX;
+	private int REMS_WINDSPEED_MIN;
 	private int REMS_WINDSPEED;
 	private int REMS_GROUDTEMP_MIN;
 	private int REMS_GROUNDTEMP_MAX;
@@ -14,7 +11,6 @@ public class Commands {
 	private int REMS_AIRTEMP;
 	private int REMS_AIRTEMP_MIN;
 	private int REMS_AIRTEMP_MAX;
-	private int REMS_PRESSURE;
 	private int REMS_ULTRAVIOLET;
 	private int REMS_HUMIDITY;
 	private int REMS_HUMIDITY_MIN;
@@ -38,13 +34,10 @@ public class Commands {
 	
 	
 	public int getREMS_WINDSPEED() {
-		
-		Random r = new Random();
-		int getREMS_WINDSPEED = r.nextInt(getREMS_WINDSPEED_MAX() - getREMS_WINDSPEED_MIN()) + getREMS_WINDSPEED_MIN();
-		return getREMS_WINDSPEED;
+		return REMS_WINDSPEED;
 	}
 	public void setREMS_WINDSPEED(int rEMS_WINDSPEED) {
-		REMS_WINDSPEED = rEMS_WINDSPEED;
+		this.REMS_WINDSPEED = rEMS_WINDSPEED;
 	}
 	
 	
@@ -94,15 +87,6 @@ public class Commands {
 	public void setREMS_AIRTEMP_MAX(int rEMS_AIRTEMP_MAX) {
 		REMS_AIRTEMP_MAX = rEMS_AIRTEMP_MAX;
 	}
-	
-	
-	public int getREMS_PRESSURE() {
-		return REMS_PRESSURE;
-	}
-	public void setREMS_PRESSURE(int rEMS_PRESSURE) {
-		REMS_PRESSURE = rEMS_PRESSURE;
-	}
-	
 	
 	public int getREMS_ULTRAVIOLET() {
 		return REMS_ULTRAVIOLET;

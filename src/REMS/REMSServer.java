@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class REMSServer extends Thread{
 	
@@ -65,50 +64,109 @@ public class REMSServer extends Thread{
 
 					// Created an object of commands
 					Commands cmd = new Commands();
-
+					Random rn = new Random();
+					
 					// check if the command is valid
 					switch (listOfCommands.get(i)) {
 					case "REMS_WINDSPEED_MIN":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN WIND SPEED " + cmd.getREMS_WINDSPEED_MIN());
+						// 5mph - 10mph
+						int min_windspeed = rn.nextInt(10 - 5 + 1) + 5;
+						cmd.setREMS_WINDSPEED_MIN(min_windspeed);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN WIND SPEED " + cmd.getREMS_WINDSPEED_MIN() + " mph");
 						break;
 					case "REMS_WINDSPEED":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED WIND SPEED " + cmd.getREMS_WINDSPEED());
+						// 20mph - 40mph
+						int windspeed = rn.nextInt(40 - 20 + 1) + 20;
+						cmd.setREMS_WINDSPEED(windspeed);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED WIND SPEED " + cmd.getREMS_WINDSPEED() + " mph");
 						break;
 					case "REMS_WINDSPEED_MAX":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX WIND SPEED " + cmd.getREMS_WINDSPEED_MAX());
+						// 55mph - 65mph
+						int max_windspeed = rn.nextInt(65 - 55 + 1) + 55;
+						cmd.setREMS_WINDSPEED_MAX(max_windspeed);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX WIND SPEED " + cmd.getREMS_WINDSPEED_MAX() + " mph");
 						break;
 					case "REMS_GROUDTEMP_MIN":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN GROUND TEMPERATURE " + cmd.getREMS_GROUDTEMP_MIN());
+						// 55F - 68F
+						int min_groundTemp = rn.nextInt(68 - 55 + 1) + 55;
+						cmd.setREMS_GROUDTEMP_MIN(min_groundTemp);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN GROUND TEMPERATURE " + cmd.getREMS_GROUDTEMP_MIN()+ " Fahrenheit");
 						break;
 					case "REMS_GROUNDTEMP_MAX":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX GROUND TEMPERATURE " + cmd.getREMS_GROUNDTEMP_MAX());
+						// -220F - -243F
+						int max_groundTemp = rn.nextInt(243 - 220 + 1) + 220;
+						cmd.setREMS_GROUNDTEMP_MAX(max_groundTemp);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX GROUND TEMPERATURE -" + cmd.getREMS_GROUNDTEMP_MAX() + " Fahrenheit");
 						break;
 					case "REMS_GROUNDTEMP":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED GROUND TEMPERATURE " + cmd.getREMS_GROUNDTEMP());
+						// 80F - -80F
+						int groundTemp = rn.nextInt((80) - (-40 + 1)) + (-40);
+						cmd.setREMS_GROUNDTEMP(groundTemp);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED GROUND TEMPERATURE " + cmd.getREMS_GROUNDTEMP() + " Fahrenheit");
 						break;
-					case "REMS_AIRTEMP":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED AIR TEMPERATURE " + cmd.getREMS_AIRTEMP());
+					case "REMS_AIRTEMP": 
+						// 350 - 500 pascals
+						int atmosphericPress = rn.nextInt( 500 - 350 + 1 ) + 350;
+						cmd.setREMS_AIRTEMP(atmosphericPress);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED ATMOSPHERIC PRESSURE " + cmd.getREMS_AIRTEMP() + " Pascal");
 						break;
 					case "REMS_AIRTEMP_MIN":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN AIR TEMPERATURE " + cmd.getREMS_AIRTEMP_MIN());
+						// 30 - 80 pascals
+						int min_atmosphericPress = rn.nextInt( 80 - 30 + 1 ) + 30;
+						cmd.setREMS_AIRTEMP_MIN(min_atmosphericPress);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN ATMOSPHERIC PRESSURE " + cmd.getREMS_AIRTEMP_MIN() + " Pascal");
 						break;
 					case "REMS_AIRTEMP_MAX":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX AIR TEMPERATURE " + cmd.getREMS_AIRTEMP_MAX());
-						break;
-					case "REMS_PRESSURE":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED PRESSURE " + cmd.getREMS_PRESSURE());
+						// 600 - 750 pascal
+						int max_atmosphericPress = rn.nextInt( 750 - 600 + 1 ) + 600;
+						cmd.setREMS_AIRTEMP_MAX(max_atmosphericPress);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX ATMOSPHERIC PRESSURE " + cmd.getREMS_AIRTEMP_MAX() + " Pascal");
 						break;
 					case "REMS_ULTRAVIOLET":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED ULTRAVIOLET " + cmd.getREMS_ULTRAVIOLET());
+						int ultraviolet = rn.nextInt( 5 - 1 + 1 ) + 1;
+						cmd.setREMS_ULTRAVIOLET(ultraviolet);
+						
+						String getUltraviolet = "Moderate radiation";
+						
+						switch (cmd.getREMS_ULTRAVIOLET()) {
+						case 5:
+							getUltraviolet = "Extream Radiation";
+							break;
+						case 4:
+							getUltraviolet = "Very High Radiation";
+							break;
+						case 3:
+							getUltraviolet = "High Radiation";
+							break;
+						case 2:
+							getUltraviolet = "Moderate Radiation";
+							break;
+						case 1:
+							getUltraviolet = "Low Radiation";
+							break;
+						default:
+								
+						}
+						
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED ULTRAVIOLET " + getUltraviolet);
 						break;
 					case "REMS_HUMIDITY":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED HUMIDITY " + cmd.getREMS_HUMIDITY());
+						// 70% - 74%
+						int humidity = rn.nextInt( 74 - 70 + 1 ) + 70;
+						cmd.setREMS_HUMIDITY(humidity);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED HUMIDITY " + cmd.getREMS_HUMIDITY()  + "%");
 						break;
 					case "REMS_HUMIDITY_MIN":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN HUMIDITY " + cmd.getREMS_HUMIDITY_MIN());
+						// 75% - 79%
+						int min_humidity = rn.nextInt( 79 - 75 + 1 ) + 75;
+						cmd.setREMS_HUMIDITY_MIN(min_humidity);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MIN HUMIDITY " + cmd.getREMS_HUMIDITY_MIN() + "%");
 						break;
 					case "REMS_HUMIDITY_MAX":
-						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX HUMIDITY " + cmd.getREMS_HUMIDITY_MAX());
+						// 80% - 100%
+						int max_humidity = rn.nextInt( 100 - 80 + 1 ) + 80;
+						cmd.setREMS_HUMIDITY_MAX(max_humidity);
+						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX HUMIDITY " + cmd.getREMS_HUMIDITY_MAX() + "%");
 						break;
 					default:
 						out.writeUTF("Invalid Command");
