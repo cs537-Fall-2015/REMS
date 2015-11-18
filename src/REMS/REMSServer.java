@@ -35,17 +35,21 @@ public class REMSServer extends Thread{
 		try {
 			// Establish a serversocket on a specified port
 			ServerSocket ss = new ServerSocket(port);
+			
+			
 			System.out.println("Waiting for client to request a connection.. ");
 
 			// Accept the connection from a client
 			while (true) {
 
 				con = ss.accept();
-				System.out.println("Connection Established to: " + con.getRemoteSocketAddress() + "\nTimestamp: "
+				System.out.println("Server Connection Established to: " + con.getRemoteSocketAddress() + "\nTimestamp: "
 						+ dateFormat.format(date));
 
 				// Data input steam to read the incoming data from the client
-				System.out.println("Created Datastream to read input");
+				System.out.println("Created Datastream to read input\n");
+			
+				
 				
 				DataInputStream in =  new DataInputStream(con.getInputStream());
 				 
@@ -53,19 +57,24 @@ public class REMSServer extends Thread{
                 Object object = objectInput.readObject();
                 
                 listOfCommands =  (ArrayList<String>) object;
-					
+				
+             // Data output stream to write data to the client
+				DataOutputStream out = new DataOutputStream(con.getOutputStream());
+
+				// Created an object of commands
+				Commands cmd = new Commands();
+				Random rn = new Random();
+				
+				for (int i = 0; i < listOfCommands.size(); i++) {
+					System.out.println("Message from client: " + listOfCommands.get(i));
+				}
+				
 				// Store the command from the client
 			//	while ((cmdFromClient = in.readUTF().toString()) != null) {
 				for (int i = 0; i < listOfCommands.size(); i++) {
-					System.out.println("Message from client: " + listOfCommands.get(i));
-
-					// Data output stream to write data to the client
-					DataOutputStream out = new DataOutputStream(con.getOutputStream());
-
-					// Created an object of commands
-					Commands cmd = new Commands();
-					Random rn = new Random();
 					
+//					System.out.println("Message from client: " + listOfCommands.get(i));
+
 					// check if the command is valid
 					switch (listOfCommands.get(i)) {
 					case "REMS_WINDSPEED_MIN":

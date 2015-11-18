@@ -36,11 +36,11 @@ public class REMSClient extends Thread{
 	public void run() {
 		try {
 			client = new Socket(host, port);
-
+			
 			System.out.println("Connecting to server on port " + port);
 
-			System.out.println("Connection Established: " + client.getRemoteSocketAddress());
-
+			System.out.println("Client Connection Established: " + client.getRemoteSocketAddress());
+			
 			DataInputStream in = new DataInputStream(client.getInputStream());
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 			
@@ -50,26 +50,25 @@ public class REMSClient extends Thread{
 			    }
 			}
 			
-		
 			ObjectOutputStream objectOutput = new ObjectOutputStream(client.getOutputStream());
             objectOutput.writeObject(listOfCommands);
 
-            
-			System.out.println("Command Sent for processing");
+			System.out.println("Command Sent for processing\n");
 
 			while((msgFromServer = in.readUTF().toString().toUpperCase()) != null) {
 				
 				responseFromServer.add(msgFromServer);
-												
+																
 				System.out.println("\nResponse From Server: " + msgFromServer);
-								
+																
 				AddToFile(responseFromServer);				
 			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(e.getLocalizedMessage());
 		} finally {
-			try {		
+			try {	
 				client.close();
 			} catch (IOException e) {
 				e.printStackTrace();
