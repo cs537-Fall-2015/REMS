@@ -1,0 +1,54 @@
+NEED TO CHANGE COMMANDS FILE LIKE THIS
+
+
+
+public class Commands extends DataReadDemo {
+
+	private int REMS_WINDSPEED_MAX = 100;
+	private int REMS_WINDSPEED_MIN = 45;
+	private int REMS_WINDSPEED;
+	private int REMS_GROUDTEMP_MIN;
+	private int REMS_GROUNDTEMP_MAX;
+	private int REMS_GROUNDTEMP;
+	private int REMS_AIRTEMP;
+	private int REMS_AIRTEMP_MIN;
+	private int REMS_AIRTEMP_MAX;
+	private int REMS_PRESSURE;
+	private int REMS_ULTRAVIOLET;
+	private int REMS_HUMIDITY;
+	private int REMS_HUMIDITY_MIN;
+	private int REMS_HUMIDITY_MAX;
+	int NoOfValues=10;
+	
+DataReadDemo data = new DataReadDemo();
+
+	public int getREMS_WINDSPEED_MAX() {
+		
+		REMS_WINDSPEED_MAX = Integer.parseInt(data.REMS_WINDSPEED_MAX);
+		return REMS_WINDSPEED_MAX;
+	}
+	
+	public void setREMS_WINDSPEED_MAX(int rEMS_WINDSPEED_MAX) {
+		REMS_WINDSPEED_MAX = rEMS_WINDSPEED_MAX;
+	}
+	
+	
+	public int getREMS_WINDSPEED_MIN() {
+		
+		REMS_WINDSPEED_MIN = Integer.parseInt(data.REMS_WINDSPEED_MIN);
+		
+		return REMS_WINDSPEED_MIN;
+	}
+	
+	public void setREMS_WINDSPEED_MIN(int rEMS_WINDSPEED_MIN) {
+		REMS_WINDSPEED_MIN = rEMS_WINDSPEED_MIN;
+	}
+	
+	
+	public int getREMS_WINDSPEED() {
+		
+		Random r = new Random();
+		REMS_WINDSPEED=data.REMS_WINDSPEED.get(r.nextInt(NoOfValues - 0) + 0);
+		return REMS_WINDSPEED;
+		
+	}
