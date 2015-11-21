@@ -36,40 +36,42 @@ public class REMSClient extends Thread{
 	public void run() {
 		try {
 			client = new Socket(host, port);
-
+			
 			System.out.println("Connecting to server on port " + port);
 
-			System.out.println("Connection Established: " + client.getRemoteSocketAddress());
-
+			System.out.println("Client Connection Established: " + client.getRemoteSocketAddress());
+			
 			DataInputStream in = new DataInputStream(client.getInputStream());
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 			
-			for (String line : Files.readAllLines(Paths.get("M:/S/Courses/CS537/workspace/REMS/Commands.txt"))) {
+			//read the commands from a text file
+			for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
 			    for (String part : line.split("\\s")) {
 			        listOfCommands.add(part);
 			    }
 			}
 			
-		
 			ObjectOutputStream objectOutput = new ObjectOutputStream(client.getOutputStream());
             objectOutput.writeObject(listOfCommands);
 
-            
-			System.out.println("Command Sent for processing");
+			System.out.println("Command Sent for processing\n");
 
+			//Read all the responses from the server
 			while((msgFromServer = in.readUTF().toString().toUpperCase()) != null) {
 				
 				responseFromServer.add(msgFromServer);
-												
+																
 				System.out.println("\nResponse From Server: " + msgFromServer);
-								
+					
+				//create an output file
 				AddToFile(responseFromServer);				
 			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(e.getLocalizedMessage());
 		} finally {
-			try {		
+			try {	
 				client.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -77,13 +79,13 @@ public class REMSClient extends Thread{
 		}	
 	}
 
-	private static void AddToFile(List<String> listOfCommands) throws IOException {
+	private static void AddToFile(List<String> responseFromServer) throws IOException {
 
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
 		Date date = new Date();
-		
-		File file = new File("M:/S/Courses/CS537/workspace/REMS/ServerOutput.txt");
-		
+		//files location
+		File file = new File("P:/CS_537/REMS_Workspace/REMS/ServerOutput.txt");		
+		//creating a new file
 		if (!file.exists()) {
 			file.createNewFile();
 		}
@@ -92,11 +94,13 @@ public class REMSClient extends Thread{
 		BufferedWriter bw = new BufferedWriter(fw);
 		
 		bw.write("==================== " +  dateFormat.format(date) + " ====================\n");
-		for (String list: listOfCommands) {
+		//write data to the output file
+		for (String list: responseFromServer) {
 			bw.write(list + "\n");
 		}
 		bw.write("===================================================================\n");
-
+		
+		//close the writer
 		bw.close();
 		
 	}	
