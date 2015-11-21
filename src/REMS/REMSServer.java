@@ -48,33 +48,31 @@ public class REMSServer extends Thread{
 
 				// Data input steam to read the incoming data from the client
 				System.out.println("Created Datastream to read input\n");
-			
-				
-				
 				DataInputStream in =  new DataInputStream(con.getInputStream());
 				 
-				ObjectInputStream objectInput = new ObjectInputStream(con.getInputStream()); //Error Line!
+				//Receive the arraylist object from the client
+				ObjectInputStream objectInput = new ObjectInputStream(con.getInputStream());
                 Object object = objectInput.readObject();
                 
+                //store the commands received in an arraylist
                 listOfCommands =  (ArrayList<String>) object;
 				
-             // Data output stream to write data to the client
+                // Data output stream to write data to the client
 				DataOutputStream out = new DataOutputStream(con.getOutputStream());
 
 				// Created an object of commands
 				Commands cmd = new Commands();
 				Random rn = new Random();
 				
+				System.out.println("===================== SERVER =====================");
 				for (int i = 0; i < listOfCommands.size(); i++) {
 					System.out.println("Message from client: " + listOfCommands.get(i));
 				}
+				System.out.println("===================== SERVER =====================");
 				
-				// Store the command from the client
-			//	while ((cmdFromClient = in.readUTF().toString()) != null) {
+				
 				for (int i = 0; i < listOfCommands.size(); i++) {
 					
-//					System.out.println("Message from client: " + listOfCommands.get(i));
-
 					// check if the command is valid
 					switch (listOfCommands.get(i)) {
 					case "REMS_WINDSPEED_MIN":
@@ -182,7 +180,7 @@ public class REMSServer extends Thread{
 					}
 				}
 			}
-			// catch any exceptions
+		// catch any exceptions
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
 		} finally {

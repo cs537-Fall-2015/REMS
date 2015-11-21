@@ -44,6 +44,7 @@ public class REMSClient extends Thread{
 			DataInputStream in = new DataInputStream(client.getInputStream());
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 			
+			//read the commands from a text file
 			for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
 			    for (String part : line.split("\\s")) {
 			        listOfCommands.add(part);
@@ -55,12 +56,14 @@ public class REMSClient extends Thread{
 
 			System.out.println("Command Sent for processing\n");
 
+			//Read all the responses from the server
 			while((msgFromServer = in.readUTF().toString().toUpperCase()) != null) {
 				
 				responseFromServer.add(msgFromServer);
 																
 				System.out.println("\nResponse From Server: " + msgFromServer);
-																
+					
+				//create an output file
 				AddToFile(responseFromServer);				
 			}
 			
@@ -76,13 +79,15 @@ public class REMSClient extends Thread{
 		}	
 	}
 
-	private static void AddToFile(List<String> listOfCommands) throws IOException {
+	private static void AddToFile(List<String> responseFromServer) throws IOException {
 
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
 		Date date = new Date();
 		
+		//files location
 		File file = new File("P:/CS_537/REMS_Workspace/REMS/ServerOutput.txt");
 		
+		//creating a new file
 		if (!file.exists()) {
 			file.createNewFile();
 		}
@@ -91,11 +96,13 @@ public class REMSClient extends Thread{
 		BufferedWriter bw = new BufferedWriter(fw);
 		
 		bw.write("==================== " +  dateFormat.format(date) + " ====================\n");
-		for (String list: listOfCommands) {
+		//write data to the output file
+		for (String list: responseFromServer) {
 			bw.write(list + "\n");
 		}
 		bw.write("===================================================================\n");
-
+		
+		//close the writer
 		bw.close();
 		
 	}	
