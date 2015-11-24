@@ -50,11 +50,6 @@ public class FRemsserv {
 
 				DataInputStream in =  new DataInputStream(con.getInputStream());
 				 
-/*				for (String line : Files.readAllLines(Paths.get("P:/CS_537/REMS_Workspace/REMS/Commands.txt"))) {
-				    for (String part : line.split("\\s")) {
-				        listOfCommands.add(part);
-				    }
-				} */
 				String cmdFromClient;
 				
                 ObjectInputStream objectInput = new ObjectInputStream(con.getInputStream()); //Error Line!
@@ -62,18 +57,11 @@ public class FRemsserv {
                 
                 listOfCommands =  (ArrayList<String>) object;
                 
-//                System.out.println(titleList.get(1));
-
-//                while ((cmdFromClient = in.readUTF().toString()) != null) {
-//					listOfCommands.add(cmdFromClient);
-//				}
 				
 				for (String list: listOfCommands) {
 					System.out.println(list);
 				}
-								
-				// Store the command from the client
-			//	while ((cmdFromClient = in.readUTF().toString()) != null) {
+
 				for (int i = 0; i < listOfCommands.size(); i++) {
 					System.out.println("Message from client: " + listOfCommands.get(i));
 

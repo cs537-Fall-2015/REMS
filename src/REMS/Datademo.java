@@ -11,7 +11,7 @@ public class Datademo {
 	@SuppressWarnings("unchecked")
 	public static void main(String args[]) {
 
-		int NoOfValues = 10;
+		int NoOfValues = 365;
 		JSONObject mainObj = new JSONObject();
 		JSONArray windspeedarray = new JSONArray();
 

@@ -62,6 +62,7 @@ public class REMSClient extends Thread{
 				responseFromServer.add(msgFromServer);
 																
 				System.out.println("\nResponse From Server: " + msgFromServer);
+				Thread.sleep(1000);
 					
 				//create an output file
 				AddToFile(responseFromServer);				
@@ -70,6 +71,8 @@ public class REMSClient extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(e.getLocalizedMessage());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		} finally {
 			try {	
 				client.close();

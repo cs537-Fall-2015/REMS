@@ -36,7 +36,6 @@ public class REMSServer extends Thread{
 			// Establish a serversocket on a specified port
 			ServerSocket ss = new ServerSocket(port);
 			
-			
 			System.out.println("Waiting for client to request a connection.. ");
 
 			// Accept the connection from a client
@@ -67,6 +66,7 @@ public class REMSServer extends Thread{
 				System.out.println("===================== SERVER =====================");
 				for (int i = 0; i < listOfCommands.size(); i++) {
 					System.out.println("Message from client: " + listOfCommands.get(i));
+					Thread.sleep(1000);
 				}
 				System.out.println("===================== SERVER =====================");
 				
@@ -176,7 +176,7 @@ public class REMSServer extends Thread{
 						out.writeUTF(listOfCommands.get(i) + ": CALCULATED MAX HUMIDITY " + cmd.getREMS_HUMIDITY_MAX() + "%");
 						break;
 					default:
-						out.writeUTF("Invalid Command");
+						out.writeUTF(listOfCommands.get(i) + ": Invalid Command");
 					}
 				}
 			}

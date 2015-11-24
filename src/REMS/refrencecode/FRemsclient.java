@@ -50,10 +50,6 @@ public class FRemsclient {
 			ObjectOutputStream objectOutput = new ObjectOutputStream(client.getOutputStream());
             objectOutput.writeObject(listOfCommands);
 			
-//			for (int i = 0; i < listOfCommands.size(); i++) {
-///				 out.writeUTF(listOfCommands.get(i));
-//			}
-
 			
 			System.out.println("Command Sent for processing");
 
